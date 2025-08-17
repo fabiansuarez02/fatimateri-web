@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #FDFBF8; /* Base ligera */
+    color: #4B4B4B; /* Texto general, un gris suave */
+}
+h1, h2, h3, h4, .font-heading {
+    font-family: 'Montserrat', sans-serif;
+}
+.text-primary-heading { /* Nuevo color para títulos principales */
+    color: #8A6BA8; /* Púrpura apagado */
+}
+.text-accent-color { /* Nuevo color de acento para elementos destacados */
+    color: #BDB2E8; /* Lavanda suave */
+}
+.active-tab {
+    background-color: #BDB2E8; /* Lavanda suave */
+    color: #FFFFFF;
+    border-color: #BDB2E8;
+}
+.inactive-tab {
+    background-color: transparent;
+    color: #BDB2E8;
+    border-color: #BDB2E8;
+}
+.cta-button-primary {
+    background-color: #BDB2E8; /* Lavanda suave */
+    color: #FFFFFF;
+    transition: background-color 0.3s ease;
+}
+.cta-button-primary:hover {
+    background-color: #A18FE0; /* Púrpura un poco más oscuro para hover */
+}
+.cta-button-secondary {
+    background-color: transparent;
+    color: #BDB2E8;
+    border: 2px solid #BDB2E8;
+    transition: all 0.3s ease;
+}
+.cta-button-secondary:hover {
+    background-color: #BDB2E8;
+    color: #FFFFFF;
+}
+
+
+/*
+Chosen Palette: Armonía Púrpura y Melocotón
+Base: #FDFBF8 (Blanco Melocotón)
+Texto General: #4B4B4B (Gris Oscuro Suave)
+Títulos Principales: #8A6BA8 (Púrpura Apagado)
+Acento y CTA Primario: #BDB2E8 (Lavanda Suave)
+Acento Hover: #A18FE0 (Púrpura más oscuro)
+*/
