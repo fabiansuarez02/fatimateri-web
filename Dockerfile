@@ -6,8 +6,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-# En caso de necesitar conectarse al backend, la URL sería inyectada aquí.
-# Para local/docker, el proxy reverso inverso del VPS o nginx local se encargará
+# Construimos la aplicación vite
 RUN npm run build
 
 # Etapa 2: Servidor Web Nginx
@@ -25,7 +24,8 @@ RUN echo 'server { \
         try_files $uri $uri/ /index.html; \
     } \
     location /api/ { \
-        proxy_pass http://backend:1337/; \
+        rewrite ^/api/(.*) /$1 break; \
+        proxy_pass http://directus:8055; \
         proxy_set_header Host $host; \
         proxy_set_header X-Real-IP $remote_addr; \
     } \
