@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: fatima-db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME:-fatima}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-fatimasecret}
+      POSTGRES_DB: ${DATABASE_NAME:-fatima_db}
+    volumes:
+      - fatima-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Backend: Strapi (Gestor CMS y Portal de clientas)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fatima-backend
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${DATABASE_NAME:-fatima_db}
+      DATABASE_USERNAME: ${DATABASE_USERNAME:-fatima}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-fatimasecret}
+      DATABASE_SSL: "false"
+      APP_KEYS: ${APP_KEYS:-"to_be_generated"}
+      API_TOKEN_SALT: ${API_TOKEN_SALT:-"to_be_generated"}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-"to_be_generated"}
+      JWT_SECRET: ${JWT_SECRET:-"to_be_generated"}
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./backend/public/uploads:/opt/app/public/uploads
+
+  # Frontend: Aplicación React SPA servida con Nginx
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fatima-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  fatima-data:
