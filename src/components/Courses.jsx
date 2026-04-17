@@ -92,7 +92,7 @@ const Courses = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch(`${directusUrl}/items/cursos?filter[status][_eq]=published&sort=sort,proximo_inicio&fields=id,titulo,descripcion,modalidad,duracion,proximo_inicio,precio,imagen`)
+    fetch(`${directusUrl}/items/cursos?filter[status][_eq]=published&sort=proximo_inicio&fields=id,titulo,descripcion,modalidad,duracion,proximo_inicio,precio,imagen`)
       .then(r => r.json())
       .then(data => {
         if (data.errors) throw new Error(data.errors[0]?.message);
