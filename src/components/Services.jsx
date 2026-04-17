@@ -1,4 +1,33 @@
 import React, { useState } from 'react';
+import { MessageCircle } from 'lucide-react';
+
+const WA_NUMBER = '5493814439445';
+const WA_MESSAGES = {
+  limpieza:      'Hola Fátima! Me interesa saber más sobre la Limpieza Energética con Péndulo.',
+  paquetes:      'Hola Fátima! Quisiera consultar los precios de los paquetes de sesiones.',
+  complementarios: 'Hola Fátima! Me interesa conocer más sobre las Terapias Complementarias.',
+  espacios:      'Hola Fátima! Quisiera consultar sobre la limpieza energética para espacios o animales.',
+};
+
+function WhatsAppCTA({ tab }) {
+  const msg = encodeURIComponent(WA_MESSAGES[tab] || 'Hola Fátima! Quisiera consultar sobre tus servicios.');
+  return (
+    <div className="mt-8 pt-6 border-t border-stone-200 flex flex-col sm:flex-row items-center gap-4">
+      <p className="text-[#6c6c6c] text-sm text-center sm:text-left">
+        ¿Te interesa este servicio? Los precios se informan de forma personalizada por mensaje privado.
+      </p>
+      <a
+        href={`https://wa.me/${WA_NUMBER}?text=${msg}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="shrink-0 inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold text-sm px-5 py-2.5 rounded-full shadow transition-all hover:scale-105 active:scale-95"
+      >
+        <MessageCircle className="w-4 h-4" />
+        Consultar precio
+      </a>
+    </div>
+  );
+}
 
 const Services = () => {
     const [activeTab, setActiveTab] = useState('limpieza');
@@ -29,13 +58,14 @@ const Services = () => {
                                 </ol>
                             </div>
                         </div>
+                        <WhatsAppCTA tab="limpieza" />
                     </div>
                 );
             case 'paquetes':
                 return (
                     <div id="paquetes-content">
                         <h3 className="font-heading text-2xl font-bold text-accent-color mb-4">Paquetes de Sesiones</h3>
-                        <p className="mb-6 text-[#4B4B4B]">Para un proceso de sanación más profundo y duradero, te ofrezco Packs de Sesiones con precios reducidos, permitiendo un cambio total en tu sistema energético.</p>
+                        <p className="mb-6 text-[#4B4B4B]">Para un proceso de sanación más profundo y duradero, te ofrezco Packs de Sesiones que permiten un trabajo energético sostenido y una transformación real en tu sistema.</p>
                         <div className="grid sm:grid-cols-2 gap-6 text-center">
                             <div className="border border-stone-200 p-6 rounded-lg bg-[#FDFBF8]">
                                 <h4 className="font-heading text-xl font-semibold text-primary-heading">Pack de 3 Sesiones</h4>
@@ -46,6 +76,7 @@ const Services = () => {
                                 <p className="mt-2 text-[#4B4B4B]">El camino hacia una transformación profunda y consolidada.</p>
                             </div>
                         </div>
+                        <WhatsAppCTA tab="paquetes" />
                     </div>
                 );
             case 'complementarios':
@@ -61,6 +92,7 @@ const Services = () => {
                              <li className="flex items-center"><span className="mr-2 text-accent-color">&#10038;</span>Registros Akáshicos</li>
                              <li className="flex items-center"><span className="mr-2 text-accent-color">&#10038;</span>Sanación de Útero</li>
                         </ul>
+                        <WhatsAppCTA tab="complementarios" />
                     </div>
                 );
             case 'espacios':
@@ -78,6 +110,7 @@ const Services = () => {
                                 <p className="mt-2 text-[#4B4B4B]">Brinda equilibrio y bienestar a tus mascotas, ayudando en problemas de comportamiento o salud.</p>
                             </div>
                         </div>
+                        <WhatsAppCTA tab="espacios" />
                     </div>
                 );
             default:
