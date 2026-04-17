@@ -120,3 +120,6 @@ coverage
 
 # Directus uploads (archivos subidos en runtime)
 uploads/
+
+# Variables de entorno con credenciales — NUNCA subir al repo
+variables.env
