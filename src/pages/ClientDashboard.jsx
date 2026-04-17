@@ -98,7 +98,7 @@ function TestimonioForm({ user, onEnviado, onCancel }) {
     setError('');
     setLoading(true);
     try {
-      const token = localStorage.getItem('directus_token');
+      const token = localStorage.getItem('auth_token');
       const res = await fetch(`${directusUrl}/items/testimonios`, {
         method: 'POST',
         headers: {
@@ -199,7 +199,7 @@ export default function ClientDashboard() {
 
   // Cargar testimonios propios
   const cargarTestimonios = () => {
-    const token = localStorage.getItem('directus_token');
+    const token = localStorage.getItem('auth_token');
     fetch(`${directusUrl}/items/testimonios?fields=id,nombre_publico,servicio,comentario,status,date_created&sort=-date_created`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })

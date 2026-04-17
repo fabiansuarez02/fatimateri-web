@@ -40,7 +40,7 @@ function TestimonioModal({ user, onClose, onEnviado }) {
     setError('');
     setLoading(true);
     try {
-      const token = localStorage.getItem('directus_token');
+      const token = localStorage.getItem('auth_token');
       const res = await fetch(`${directusUrl}/items/testimonios`, {
         method: 'POST',
         headers: {
