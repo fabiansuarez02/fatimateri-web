@@ -117,3 +117,6 @@ dist-ssr
 # Vitest build output
 coverage
 
+
+# Directus uploads (archivos subidos en runtime)
+uploads/

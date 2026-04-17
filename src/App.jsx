@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { AuthProvider } from './context/AuthContext';
 import MainLayout from './layouts/MainLayout';
+import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
@@ -12,16 +14,25 @@ import ClientDashboard from './pages/ClientDashboard';
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="blog" element={<BlogList />} />
-          <Route path="blog/:id" element={<BlogPost />} />
-          <Route path="portal/login" element={<Login />} />
-          <Route path="portal/registro" element={<Register />} />
-          <Route path="portal/dashboard" element={<ClientDashboard />} />
-        </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="blog" element={<BlogList />} />
+            <Route path="blog/:id" element={<BlogPost />} />
+            <Route path="portal/login" element={<Login />} />
+            <Route path="portal/registro" element={<Register />} />
+            <Route
+              path="portal/dashboard"
+              element={
+                <ProtectedRoute>
+                  <ClientDashboard />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
