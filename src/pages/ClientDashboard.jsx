@@ -200,7 +200,7 @@ export default function ClientDashboard() {
   // Cargar testimonios propios
   const cargarTestimonios = () => {
     const token = localStorage.getItem('auth_token');
-    fetch(`${directusUrl}/items/testimonios?fields=id,nombre_publico,servicio,comentario,status,date_created&sort=-date_created`, {
+    fetch(`${directusUrl}/items/testimonios?fields=id,nombre_publico,servicio,comentario,status&sort=-id`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
       .then(r => r.json())

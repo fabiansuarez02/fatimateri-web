@@ -186,7 +186,7 @@ const Testimonials = () => {
   const [enviado, setEnviado] = useState(false);
 
   const cargar = () => {
-    fetch(`${directusUrl}/items/testimonios?filter[status][_eq]=approved&sort=-date_created&fields=id,nombre_publico,servicio,comentario,date_created`)
+    fetch(`${directusUrl}/items/testimonios?sort=-id&fields=id,nombre_publico,servicio,comentario`)
       .then(r => r.json())
       .then(data => setTestimonios(data.data || []))
       .catch(() => {})
